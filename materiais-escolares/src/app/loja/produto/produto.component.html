@@ -1,0 +1,104 @@
+<app-navbar style="width: 98.8vw;" (clickPesquisa)="filtroPesquisa($event)"></app-navbar>
+
+<body>
+    <div class="divCentral">
+        <div class="redirecionamento">
+            <span class="spanRedirecionamento" (click)="inicio()">Início</span>
+        </div>
+        <div class="divPrincipal">
+            <div class="divEsquerda">
+                <h4>{{produto.NOME}}</h4>
+                <span class="marca">{{produto.MARCA}}</span>
+                <img style="width: 60%" src={{produto.IMAGEM_NOME}}>
+            </div>
+            <div class="divDireita">
+                <div class="divCompra">
+                    <h4 style="color: #07889b; padding: 4px; border-bottom: 0.5px solid #4abdac; margin-bottom: 15px;">
+                        {{valorProduto}}</h4>
+                    <span *ngIf="codigoUser && codigoUser != ''" style="color: #66b9bf" class="selecionaEndereco"
+                        (click)="selecionaEndereco()">Selecionar Endereço</span>
+                    <div *ngIf="pais" style="margin-top: 5px; margin-bottom: 10px;" class="endereco">
+                        <span style="color: #66b9bf;">{{pais}}</span>
+                        <div class="linhaEnderecos">
+                            <span style="color: #66b9bf; margin-right: 20%;">{{primeiroEndereco.RUA}}</span>
+                            <span style="color: #66b9bf; margin-right: 20%;">{{primeiroEndereco.BAIRRO}}</span>
+                            <span style="color: #66b9bf;">{{primeiroEndereco.CIDADE}}</span>
+                        </div>
+                    </div>
+                    <span *ngIf="pais" style="color: #66b9bf;">Receba em até {{diasEntrega}} dias úteis -
+                        {{frete}}</span>
+                    <div
+                        style="display: flex; align-items: center; width: 100%; justify-content: space-between; margin-top: 10px;">
+                        <div style="display: flex; width: 50%;">
+                            <span style="margin-right: 5px; color: #07889b;">Quantidade: </span>
+                            <input class="inputQtd" [(ngModel)]="quantidade" type="number" min="1">
+                        </div>
+                        <button *ngIf="!possuiNoCarrinho" class="botaoQtd" (click)="adicionarCarrinho()">Adicionar ao
+                            Carrinho</button>
+                        <button *ngIf="possuiNoCarrinho" class="botaoQtd">No Carrinho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="especificacoes">
+            <h4 style="color: #07889b; margin-bottom: 20px;">Especificações</h4>
+            <div style="margin-bottom: 10px;">{{produto.DESCRICAO}}</div>
+            <ul>
+                <li *ngFor="let ponto of especificacoes">
+                    <span>{{ponto}}</span>
+                </li>
+            </ul>
+        </div>
+        <div
+            style="width: 100%; border-bottom: 1px solid #4abdac; color: #4abdac; font-size: 24px; margin-bottom: 35px;">
+            Recomendados
+        </div>
+        <div class="recomendacoes" style="display: flex; justify-content: space-evenly; margin-bottom: 60px;">
+            <div *ngFor="let prod of listaProdutos" class="divProduto3" (click)="produtoRota(prod.CODIGO)">
+                <img class="imagensProduto" src='{{prod.IMAGEM_NOME}}'>
+                <div style="display: flex; flex-direction: column;">
+                    <span style="margin-bottom: 12px;">{{prod.NOME}}</span>
+                    <span>{{prod.MARCA}}</span>
+                    <span style="font-size: 22px;">{{getPreco(prod.VALOR)}}</span>
+                </div>
+            </div>
+        </div>
+        <div
+            style="width: 100%; color: #4abdac; font-size: 24px; margin-bottom: 3px;">
+            Avaliações
+        </div>
+        <div style="width: 100%; border-bottom: 1px solid #4abdac; color: #f7b733; font-size: 20px; margin-bottom: 35px;">
+            {{produto.ESTRELAS}} de 5
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="avaliacoes" *ngFor="let avaliacao of avaliacoes; let i = index">
+                <div style="width: 100%; display: flex; justify-content: space-between;">
+                    <div style="color: #07889b; font-size: 20px; text-align: left;">{{avaliacao.USER_NOME}}</div>
+                    <div class="data">{{avaliacao.DATA | date : 'dd/MM/yyyy'}}</div>
+                </div>
+                <div style="width: 100%; display: flex; margin-top: 10px; margin-bottom: 15px;">
+                    <div style="margin-right: 5px; color: #f7b733;">Nota: {{avaliacao.NOTA}} de 5</div>
+                </div>
+                <div class="textoAvaliacao">
+                    {{avaliacao.AVALIACAO}}
+                </div>
+                <div *ngIf="avaliacao.USER_NOME == nomeUser" style="display: flex; justify-content: right; width: 100%;">
+                    <button class="excluirAvaliacao" (click)="excluirAvaliacao(i, avaliacao.CODIGO)">Excluir</button>
+                </div>
+            </div>
+            <div *ngIf="codigoUser" class="avaliacoes" style="margin-top: 20px;">
+                <div style="color: #07889b; font-size: 20px; text-align: left;  width: 100%;">Escrever Avaliação</div>
+                <div style="width: 100%; display: flex; margin-top: 10px; margin-bottom: 15px;">
+                    <div style="margin-right: 5px;">Nota: </div>
+                    <input class="inputNota" type="number" min="1" max="5" [(ngModel)]="nota">
+                </div>
+                <textarea [(ngModel)]="textoAvaliacao" name="text" rows="4" wrap="soft" maxlength="500"
+                    class="inputAvaliacao" placeholder="Escrever Avaliação">
+                </textarea>
+                <div style="display: flex; justify-content: right; width: 100%;">
+                    <button class="enviarAvaliacao" (click)="adicionarAvaliacao()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

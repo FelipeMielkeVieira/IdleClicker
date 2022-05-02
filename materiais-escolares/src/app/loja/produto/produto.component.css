@@ -1,0 +1,160 @@
+body {
+    width: 98.7vw;
+    display: flex;
+    justify-content: center;
+}
+
+.divCentral {
+    width: 90vw;
+}
+
+.redirecionamento {
+    margin-top: 25px;
+    font-size: 14px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid rgb(129, 126, 126);
+    margin-bottom: 40px;
+}
+
+.spanRedirecionamento {
+    margin-left: 25px;
+}
+
+.spanRedirecionamento:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.divPrincipal {
+    width: 100%;
+    display: flex;
+}
+
+.divEsquerda {
+    display: flex;
+    flex-direction: column;
+    width: 58%;
+}
+
+.marca {
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.divDireita {
+    width: 38%;
+}
+
+.divCompra {
+    width: 100%;
+    border: 1px solid rgb(95, 93, 93);
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.endereco {
+    padding: 15px;
+    border: 1px solid #07889b;
+    border-radius: 8px;
+}
+
+.linhaEnderecos {
+    display: flex;
+}
+
+.selecionaEndereco:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.inputQtd {
+    width: 25%;
+    padding: 5px;
+    border: 1px solid #66b9bf;
+    border-radius: 4px;
+    color: #66b9bf;
+}
+
+.botaoQtd {
+    padding: 5px;
+    border: 1px solid #66b9bf;
+    background-color: #66b9bf;
+    color:#07889b;
+    border-radius: 4px;
+    width: 60%;
+}
+
+.especificacoes {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    padding: 20px 60px;
+    border: 0.5px solid rgb(138, 135, 135);
+    border-radius: 6px;
+}
+
+.divProduto3 {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px 20px 15px;
+}
+
+.divProduto3:hover {
+    cursor: pointer;
+}
+
+.avaliacoes {
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputNota {
+    padding: 3px;
+    color: #f7b733;
+    border: 1px solid #f7b733;
+    border-radius: 4px;
+}
+
+.inputAvaliacao {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.enviarAvaliacao {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #66b9bf;
+    color: white;
+    margin-top: 5px;
+}
+
+.textoAvaliacao {
+    width: 100%;
+    border: 1px black solid;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.data {
+    color: gray;
+}
+
+.excluirAvaliacao {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: #f7b733;
+    margin-top: 5px;
+}
