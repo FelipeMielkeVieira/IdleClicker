@@ -1,0 +1,11 @@
+.botaoClick {
+    border-radius: 200px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+
+.botaoClick:hover {
+    cursor: pointer;
+    background-color: rgb(226, 222, 222);
+}
