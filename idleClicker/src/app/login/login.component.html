@@ -1,5 +1,8 @@
 <div style="width: 98vw; height: 97vh; display: flex; justify-content: center; align-items: center;">
     <div class="modal">
         <h2>Login</h2>
+        <input type="text" placeholder="Nome" [(ngModel)]="nome">
+        <input type="text" placeholder="Senha" [(ngModel)]="senha">
+        <span (click)="cadastro()">Cadastrar</span>
     </div>
 </div>
