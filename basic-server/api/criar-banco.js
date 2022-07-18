@@ -8,4 +8,16 @@ database(`CREATE TABLE IF NOT EXISTS USER (
         console.log('Tabela User Criada!')
     }).catch(erro => {
         console.log('Tabela User com erro!')
-    });
+});
+
+database(`CREATE TABLE IF NOT EXISTS ITENS (
+    CODIGO INTEGER PRIMARY KEY AUTOINCREMENT,
+    NOME VARCHAR(100),
+    QUANTIDADE INTEGER,
+    MULTIPLICADOR INTEGER,
+    CUSTO DOUBLE
+)`).then(result => {
+    console.log("Tabela itens Criada!")
+}).catch(erro => {
+    console.log("Tabela itens com erro!");
+})

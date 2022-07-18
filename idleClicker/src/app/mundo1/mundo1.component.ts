@@ -55,10 +55,10 @@ export class Mundo1Component implements OnInit {
   compraMelhoria(numero) {
     switch(numero) {
       case 0:
-        if(this.moedas >= 25) {
+        if(this.moedas >= 50) {
           this.aumentoClick += 1;
           document.querySelector("#melhoria0").remove();
-          this.moedas -= 25;
+          this.moedas -= 50;
         }
         break;
       case 1:
