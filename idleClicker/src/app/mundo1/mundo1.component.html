@@ -5,25 +5,9 @@
     </div>
     <div class="divDireita">
         <div class="div1">
-            <div class="itemCompra">
-                <button (click)="compraItem(0)">{{listaCustoItens[0]}}</button>
-                <span>Cursor {{listaItens[0]}}</span>
-            </div>
-            <div class="itemCompra">
-                <button (click)="compraItem(1)">{{listaCustoItens[1]}}</button>
-                <span>Tecla - {{listaItens[1]}}</span>
-            </div>
-            <div class="itemCompra">
-                <button (click)="compraItem(2)">{{listaCustoItens[2]}}</button>
-                <span>Barra de Espaço - {{listaItens[2]}}</span>
-            </div>
-            <div class="itemCompra">
-                <button (click)="compraItem(3)">{{listaCustoItens[3]}}</button>
-                <span>Crtl - {{listaItens[3]}}</span>
-            </div>
-            <div class="itemCompra">
-                <button (click)="compraItem(4)">{{listaCustoItens[4]}}</button>
-                <span>Shift - {{listaItens[4]}}</span>
+            <div *ngFor="let item of listaItens; let i = index" class="itemCompra">
+                <button (click)="compraItem(i)">{{item.CUSTO}}</button>
+                <span>{{item.NOME}} {{item.QUANTIDADE}}</span>
             </div>
         </div>
         <div class="div2">

@@ -44,6 +44,8 @@ export class CadastroComponent implements OnInit {
     let dataFinal = ano + '-' + mesf + '-' + diaf
     fetch('http://localhost:3000/api/criar_usuario', { method: 'POST', body: JSON.stringify({ nome: this.nome, senha: this.senha, data: dataFinal }), headers: { "Content-Type": "application/json" } });
     localStorage.setItem('nome', this.nome)
+    fetch('http://localhost:3000/api/criar_itens_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
+    fetch('http://localhost:3000/api/criar_moedas_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
   }
 
 }

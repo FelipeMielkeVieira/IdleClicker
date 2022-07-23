@@ -15,9 +15,20 @@ database(`CREATE TABLE IF NOT EXISTS ITENS (
     NOME VARCHAR(100),
     QUANTIDADE INTEGER,
     MULTIPLICADOR INTEGER,
-    CUSTO DOUBLE
+    CUSTO BIGINT,
+    NOME_USER varchar(100)
 )`).then(result => {
     console.log("Tabela itens Criada!")
 }).catch(erro => {
     console.log("Tabela itens com erro!");
+})
+
+database(`CREATE TABLE IF NOT EXISTS MOEDAS (
+    CODIGO INTEGER PRIMARY KEY AUTOINCREMENT,
+    NOME_USER VARCHAR(100),
+    MOEDAS_COMPUTADOR INTEGER
+)`).then(result => {
+    console.log("Tabela moedas Criada!")
+}).catch(erro => {
+    console.log("Tabela moedas com erro!");
 })
