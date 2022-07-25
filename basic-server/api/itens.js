@@ -12,11 +12,11 @@ inserirRota('/criar_itens_iniciais', function (dados, resposta) {
     ('Teclado Completo', 0, 1, 670000000, "${dados.nome}"),
     ('Mouse', 0, 1, 23000000000, "${dados.nome}"),
     ('Auto-Clicker', 0, 1, 4000000000000, "${dados.nome}"),
-    ('Processador', 0, 1, 700000000000, "${dados.nome}"),
-    ('Monitor', 0, 1, 50000000000000, "${dados.nome}"),
-    ('Placa de Vídeo', 0, 1, 120000000000000000, "${dados.nome}"),
-    ('Computador', 0, 1, 60000000000000000000, "${dados.nome}"),
-    ('Acelerador de Dinheiro', 0, 1, 1000000000000000000000000, "${dados.nome}");
+    ('Processador', 0, 1, 700000000000000, "${dados.nome}"),
+    ('Monitor', 0, 1, 50000000000000000, "${dados.nome}"),
+    ('Placa de Vídeo', 0, 1, 120000000000000000000, "${dados.nome}"),
+    ('Computador', 0, 1, 60000000000000000000000, "${dados.nome}"),
+    ('Acelerador de Dinheiro', 0, 1, 1000000000000000000000000000, "${dados.nome}");
         `)
         .then(result => {
             console.log('Itens automáticos inseridos com sucesso!')
@@ -25,6 +25,12 @@ inserirRota('/criar_itens_iniciais', function (dados, resposta) {
             console.log('Erro ao inserir itens!')
             resposta({ erro: 'Erro ao inserir itens!' })
         });
+})
+
+inserirRota('/atualizar_itens', function (dados, resposta) {
+    database(`UPDATE ITENS SET QUANTIDADE = ${dados.quantidade} WHERE CODIGO == ${dados.codigo}`);
+    database(`UPDATE ITENS SET MULTIPLICADOR = ${dados.multiplicador} WHERE CODIGO == ${dados.codigo}`);
+    database(`UPDATE ITENS SET CUSTO = ${dados.custo} WHERE CODIGO == ${dados.codigo}`);
 })
 
 inserirRota('/buscar_itens', function (dados, resposta) {

@@ -1,12 +1,12 @@
 <div class="divPrincipal">
     <div class="divEsquerda">
-        <div class="moedas">{{getMoedas()}}</div>
+        <div class="moedas">{{formatarMoedas(moedas)}}</div>
         <div class="botaoClick" (click)="clicar()"></div>
     </div>
     <div class="divDireita">
         <div class="div1">
             <div *ngFor="let item of listaItens; let i = index" class="itemCompra">
-                <button (click)="compraItem(i)">{{item.CUSTO}}</button>
+                <button (click)="compraItem(i)">{{formatarMoedas(item.CUSTO)}}</button>
                 <span>{{item.NOME}} {{item.QUANTIDADE}}</span>
             </div>
         </div>

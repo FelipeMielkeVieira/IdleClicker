@@ -32,3 +32,15 @@ database(`CREATE TABLE IF NOT EXISTS MOEDAS (
 }).catch(erro => {
     console.log("Tabela moedas com erro!");
 })
+
+database(`CREATE TABLE IF NOT EXISTS COMPRAVEIS (
+    CODIGO INTEGER PRIMARY KEY AUTOINCREMENT,
+    NOME_ITEM VARCHAR(100),
+    DESCRICAO VARCHAR(200),
+    CUSTO BIGINT,
+    NOME_USER VARCHAR(100)
+)`).then(result => {
+    console.log("Tabela compraveis Criada!")
+}).catch(erro => {
+    console.log("Tabela compraveis com erro!");
+})
