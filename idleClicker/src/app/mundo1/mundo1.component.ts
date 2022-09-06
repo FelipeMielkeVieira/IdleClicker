@@ -10,65 +10,84 @@ export class Mundo1Component implements OnInit {
   constructor() {
     let nome = localStorage.getItem('nome');
     var self = this;
-    fetch('http://localhost:3000/api/buscar_itens', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
-      result.json().then(function (data) {
-        self.listaItens = data;
-        console.log(data)
-      })
-    });
-    fetch('http://localhost:3000/api/buscar_moedas', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
-      result.json().then(function (data) {
-        self.moedas = data[0].MOEDAS_COMPUTADOR;
-      })
-    });
-
     window.addEventListener("beforeunload", function () {
-      fetch('http://localhost:3000/api/atualizar_moedas', { method: 'POST', body: JSON.stringify({ nome: nome, moedasComputador: self.moedas }), headers: { "Content-Type": "application/json" } });
-      self.listaItens.forEach((e) => {
-        fetch('http://localhost:3000/api/atualizar_itens', { method: 'POST', body: JSON.stringify({ codigo: e.CODIGO, quantidade: e.QUANTIDADE, multiplicador: e.MULTIPLICADOR, custo: e.CUSTO }), headers: { "Content-Type": "application/json" } })
+      self.melhoriasCompradas.forEach((e) => {
+        fetch('http://localhost:3000/api/atualizar_compraveis', { method: 'POST', body: JSON.stringify({ codigo: e.CODIGO }), headers: { "Content-Type": "application/json" } }).then(() => {
+        })
       })
+      fetch('http://localhost:3000/api/atualizar_moedas', { method: 'POST', body: JSON.stringify({ nome: nome, moedasComputador: self.moedas }), headers: { "Content-Type": "application/json" } });
+      fetch('http://localhost:3000/api/atualizar_variaveis', { method: 'POST', body: JSON.stringify({ nome: nome, aumento_mps: self.aumentoMps, aumento_click: self.aumentoClick }), headers: { "Content-Type": "application/json" } });
     });
   }
 
   listaItens = [];
+  listaMelhorias = [];
+  melhoriasCompradas = [];
 
   mps = 0;
   moedas = 0;
   click = 1;
 
-  custoClicar = 10;
-  custoMps = 100;
-
   aumentoMps = 1;
   aumentoClick = 1;
 
+  bolsa = false;
+
   ngOnInit() {
-    setTimeout(() => {
-      this.atualizarMps();
-      this.moedasPorSegundo();
-    }, 1000)
+    let nome = localStorage.getItem('nome');
+    var self = this;
+    fetch('http://localhost:3000/api/buscar_itens', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
+      result.json().then(function (data) {
+        self.listaItens = data;
+      })
+    }).then(() => {
+      fetch('http://localhost:3000/api/buscar_moedas', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
+        result.json().then(function (data) {
+          self.moedas = data[0].MOEDAS_COMPUTADOR;
+        })
+      }).then(() => {
+        fetch('http://localhost:3000/api/buscar_variaveis', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
+          result.json().then(function (data) {
+            console.log(data);
+            self.aumentoMps = data[0].AUMENTO_MPS;
+            self.aumentoClick = data[0].AUMENTO_CLICK;
+          })
+        }).then(() => {
+          fetch('http://localhost:3000/api/buscar_compraveis', { method: 'POST', body: JSON.stringify({ nome: nome }), headers: { "Content-Type": "application/json" } }).then(result => {
+            result.json().then(function (data) {
+              self.listaMelhorias = data;
+            })
+          }).then(() => {
+            setTimeout(() => {
+              self.atualizarMps();
+              self.moedasPorSegundo();
+            }, 1000)
+          });
+        });
+      });
+    });
   }
 
   formatarMoedas(valor) {
-    if(valor - 1000000000000000000000000000000000 >= 0) {
+    if (valor - 1000000000000000000000000000000000 >= 0) {
       return (valor / 1000000000000000000000000000000000).toFixed(2) + " De";
-    } else if(valor - 1000000000000000000000000000000 >= 0) {
+    } else if (valor - 1000000000000000000000000000000 >= 0) {
       return (valor / 1000000000000000000000000000000).toFixed(2) + " No";
-    } else if(valor - 1000000000000000000000000000 >= 0) {
+    } else if (valor - 1000000000000000000000000000 >= 0) {
       return (valor / 1000000000000000000000000000).toFixed(2) + " Oc";
-    } else if(valor - 1000000000000000000000000 >= 0) {
+    } else if (valor - 1000000000000000000000000 >= 0) {
       return (valor / 1000000000000000000000000).toFixed(2) + " Sp";
-    } else if(valor - 1000000000000000000000 >= 0) {
+    } else if (valor - 1000000000000000000000 >= 0) {
       return (valor / 1000000000000000000000).toFixed(2) + " Sx";
-    } else if(valor - 1000000000000000000 >= 0) {
+    } else if (valor - 1000000000000000000 >= 0) {
       return (valor / 1000000000000000000).toFixed(2) + " Qi";
-    } else if(valor - 1000000000000000 >= 0) {
+    } else if (valor - 1000000000000000 >= 0) {
       return (valor / 1000000000000000).toFixed(2) + " Qa";
-    } else if(valor - 1000000000000 >= 0) {
+    } else if (valor - 1000000000000 >= 0) {
       return (valor / 1000000000000).toFixed(2) + " T";
-    } else if(valor - 1000000000 >= 0) {
+    } else if (valor - 1000000000 >= 0) {
       return (valor / 1000000000).toFixed(2) + " B";
-    } else if(valor - 1000000 >= 0) {
+    } else if (valor - 1000000 >= 0) {
       return (valor / 1000000).toFixed(2) + " M";
     } else {
       return valor.toFixed(2);
@@ -92,37 +111,68 @@ export class Mundo1Component implements OnInit {
         this.listaItens[item].MULTIPLICADOR += 1;
       }
       this.atualizarMps();
+      this.listaItens.forEach((e) => {
+        fetch('http://localhost:3000/api/atualizar_itens', { method: 'POST', body: JSON.stringify({ codigo: e.CODIGO, quantidade: e.QUANTIDADE, multiplicador: e.MULTIPLICADOR, custo: e.CUSTO }), headers: { "Content-Type": "application/json" } })
+      })
     }
   }
 
-  compraMelhoria(numero) {
-    switch (numero) {
-      case 0:
-        if (this.moedas >= 50) {
-          this.aumentoClick += 1;
-          document.querySelector("#melhoria0").remove();
-          this.moedas -= 50;
-        }
-        break;
+  compraMelhoria(numero, codigo) {
+    switch (codigo) {
       case 1:
         if (this.moedas >= 50) {
-          this.aumentoClick += 0.5 * this.mps;
-          document.querySelector("#melhoria1").remove();
+          this.aumentoClick += 1;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
           this.moedas -= 50;
         }
         break;
       case 2:
         if (this.moedas >= 100) {
-          this.listaItens[0].MULTIPLICADOR *= 1.25;
-          document.querySelector("#melhoria2").remove();
+          this.aumentoClick += 0.5 * this.mps;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
           this.moedas -= 100;
         }
         break;
       case 3:
         if (this.moedas >= 100) {
-          this.aumentoMps += 0.05;
-          document.querySelector("#melhoria3").remove();
+          this.listaItens[0].MULTIPLICADOR *= 1.25;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
           this.moedas -= 100;
+        }
+        break;
+      case 4:
+        if (this.moedas >= 200) {
+          this.aumentoMps += 0.05;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
+          this.moedas -= 200;
+        }
+        break;
+      case 5:
+        if (this.moedas >= 350) {
+          this.listaItens[1].MULTIPLICADOR *= 1.5;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
+          this.moedas -= 350;
+        }
+        break;
+      case 6:
+        if (this.moedas >= 400) {
+          this.aumentoMps += 0.1;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
+          this.moedas -= 400;
+        }
+        break;
+      case 6:
+        if (this.moedas >= 500) {
+          this.bolsa = true;
+          this.melhoriasCompradas.push(this.listaMelhorias[numero]);
+          this.listaMelhorias.splice(numero, 1);
+          this.moedas -= 500;
         }
         break;
     }
@@ -148,6 +198,7 @@ export class Mundo1Component implements OnInit {
   }
 
   clicar() {
+    console.log(this.aumentoClick)
     this.moedas += this.click * this.aumentoClick;
   }
 }

@@ -11,21 +11,9 @@
             </div>
         </div>
         <div class="div2">
-            <div class="itemCompra" id="melhoria0">
-                <button (click)="compraMelhoria(0)">50</button>
-                <span>Aumenta as moedas de Click em +1</span>
-            </div>
-            <div class="itemCompra" id="melhoria1">
-                <button (click)="compraMelhoria(1)">50</button>
-                <span>Aumenta as moedas de Click em +50% moedas por segundo</span>
-            </div>
-            <div class="itemCompra" id="melhoria2">
-                <button (click)="compraMelhoria(2)">100</button>
-                <span>Cursor dá 25% mais moedas</span>
-            </div>
-            <div class="itemCompra" id="melhoria3">
-                <button (click)="compraMelhoria(3)">100</button>
-                <span>Aumenta o Mps em 5%</span>
+            <div *ngFor="let melhoria of listaMelhorias; let i = index;" class="itemCompra">
+                <button (click)="compraMelhoria(i, melhoria.CODIGO)">{{melhoria.CUSTO}}</button>
+                <span>{{melhoria.DESCRICAO}}</span>
             </div>
         </div>
     </div>

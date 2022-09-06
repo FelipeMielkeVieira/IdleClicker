@@ -16,7 +16,7 @@ inserirRota('/criar_itens_iniciais', function (dados, resposta) {
     ('Monitor', 0, 1, 50000000000000000, "${dados.nome}"),
     ('Placa de Vídeo', 0, 1, 120000000000000000000, "${dados.nome}"),
     ('Computador', 0, 1, 60000000000000000000000, "${dados.nome}"),
-    ('Acelerador de Dinheiro', 0, 1, 1000000000000000000000000000, "${dados.nome}");
+    ('O Jogo', 0, 1, 1000000000000000000000000000, "${dados.nome}");
         `)
         .then(result => {
             console.log('Itens automáticos inseridos com sucesso!')

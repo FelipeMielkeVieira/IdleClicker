@@ -46,6 +46,8 @@ export class CadastroComponent implements OnInit {
     localStorage.setItem('nome', this.nome)
     fetch('http://localhost:3000/api/criar_itens_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
     fetch('http://localhost:3000/api/criar_moedas_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
+    fetch('http://localhost:3000/api/criar_compraveis_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
+    fetch('http://localhost:3000/api/criar_variaveis_iniciais', {method: 'POST', body: JSON.stringify({ nome: this.nome }), headers: { "Content-Type": "application/json" }})
   }
 
 }
